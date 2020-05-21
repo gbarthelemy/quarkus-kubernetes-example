@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    kubernetes:
+      reload:
+        enabled: true
+        mode: event
+      config:
+        enabled: true
+        name: gateway-config
+      secrets:
+        enabled: true
+        name: gateway-secret
+        enable-api: true
+        labels:
+          gateway.secret.name:
+          gateway.secret.password:
+      discovery:
+        enabled: true
