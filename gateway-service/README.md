@@ -24,18 +24,14 @@ mvn clean install
 ```
 Build the docker image named gateway-service   
 ```bash
-docker build -t gateway-service .
+docker build -t localhost:5001/gateway-service .
 ```
 
 ### 2.2. Push the image to the kubernetes image repository
 
-Tag the image to prepare upload   
-```bash
-docker tag gateway-service:latest localhost:5000/gateway-service:latest
-```
 Push the image to the kubernetes repository
 ```bash
-docker push localhost:5000/gateway-service:latest
+docker push localhost:5001/gateway-service:latest
 ```
 
 ## 3. Create configmap and secret

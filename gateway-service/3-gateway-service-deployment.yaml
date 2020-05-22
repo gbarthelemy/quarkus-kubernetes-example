@@ -27,6 +27,6 @@ spec:
     spec:
       containers:
         - name: gateway-service
-          image: localhost:5000/gateway-service
+          image: localhost:5001/gateway-service
           ports:
             - containerPort: 8080

@@ -16,7 +16,7 @@ You will find the prerequisites installation [instructions here](utils/setup-too
 
 ## 2. Setup kubernetes cluster
 
-### 2.1. create kind kubernetes cluster
+### 2.1. create kind kubernetes cluster 
 ```bash
 ./utils/0-create-kind-cluster.sh
 ```
@@ -40,20 +40,3 @@ You will find the [instructions here](dummy-service/README.md)
 ## 4. Setup Gateway service
 
 You will find the [instructions here](gateway-service/README.md)
-
-## 5. [Optional] Setup metric server
-
-In order to use resources metric, please setup k8s metric server.
-```bash
-kubectl delete -f 2-metric-server.yml
-kubectl create -f 2-metric-server.yml
-```
-Get pod cpu/memory usage
-```bash
-kubectl top pod
-```
-
-For more information about metric-server, check :
-* https://kubernetes.io/docs/tasks/debug-application-cluster/resource-metrics-pipeline/
-* https://github.com/kubernetes-sigs/metrics-server
-
