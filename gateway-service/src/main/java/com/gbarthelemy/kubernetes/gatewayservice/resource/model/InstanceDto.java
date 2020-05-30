@@ -22,9 +22,9 @@ public class InstanceDto {
     @JsonProperty("scheme")
     String scheme;
 
-    @JsonProperty("instance-id")
+    @JsonProperty("instance_id")
     String instanceId;
 
     @JsonProperty("metadata")
-    Map<String,String> metadata;
+    Map<String, String> metadata;
 }

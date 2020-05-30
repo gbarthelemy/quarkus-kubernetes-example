@@ -10,9 +10,9 @@ import java.util.List;
 @Builder
 public class ServiceDto {
 
-    @JsonProperty("service-name")
+    @JsonProperty("service_name")
     String serviceName;
 
-    @JsonProperty("instances")
+    @JsonProperty("instance_dto_list")
     List<InstanceDto> instanceDtoList;
 }

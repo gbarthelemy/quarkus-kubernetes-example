@@ -10,5 +10,5 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: gateway-service
+              serviceName: quarkus-k8s-gateway-service
               servicePort: 8080
