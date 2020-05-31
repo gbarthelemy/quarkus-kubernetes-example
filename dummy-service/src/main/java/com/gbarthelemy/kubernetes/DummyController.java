@@ -8,7 +8,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 @Path("/")
-public class DummyResource {
+public class DummyController {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)

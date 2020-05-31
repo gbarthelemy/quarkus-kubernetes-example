@@ -1,18 +1,24 @@
-package com.gbarthelemy.kubernetes.gatewayservice.resource.resource;
+package com.gbarthelemy.kubernetes.gatewayservice.controller;
 
-import com.gbarthelemy.kubernetes.gatewayservice.resource.configuration.GatewayConfiguration;
+import com.gbarthelemy.kubernetes.gatewayservice.client.DummyClient;
+import com.gbarthelemy.kubernetes.gatewayservice.configuration.GatewayConfiguration;
 import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @RestController
 public class GatewayController {
 
-    private static final String DUMMY_SERVICE_URL = "http://quarkus-k8s-dummy-service:8080";
     public static final String NAMESPACE = "default";
+
+    @Inject
+    @RestClient
+    DummyClient dummyClient;
 
     private final KubernetesClient kubernetesClient;
     private final GatewayConfiguration gatewayConfiguration;
@@ -27,10 +33,9 @@ public class GatewayController {
         return kubernetesClient.pods().inNamespace(NAMESPACE).list().getItems();
     }
 
-    //TODO
     @GetMapping(path = "/dummy")
     public String getDummyServiceDetails() {
-        return null;
+        return dummyClient.get();
     }
 
     @GetMapping(path = "/configmap")

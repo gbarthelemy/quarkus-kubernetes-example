@@ -1,4 +1,4 @@
-package com.gbarthelemy.kubernetes.gatewayservice.resource.configuration;
+package com.gbarthelemy.kubernetes.gatewayservice.configuration;
 
 import io.quarkus.arc.config.ConfigProperties;
 import org.eclipse.microprofile.config.inject.ConfigProperty;

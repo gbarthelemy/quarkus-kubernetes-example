@@ -6,12 +6,13 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 This project has the following dependencies :
 * quarkus-spring-web : JAX-RS resource in code (Spring way) (VS quarkus-resteasy)
-* quarkus-junit5 : unit test
+* quarkus-rest-client : define rest client in code
+* quarkus-jackson : jackson de-serialization
+* quarkus-kubernetes-config : use kubernetes configmap
+* quarkus-kubernetes-client : discover kubernetes services
 * quarkus-kubernetes : create kubernetes.yml manifest when building
 * quarkus-container-image-jib : create docker image when building
-* quarkus-jackson : jackson de-serialization
-* quarkus-kubernetes-client : discover kubernetes services
-* quarkus-kubernetes-config : use kubernetes configmap
+* quarkus-junit5 : unit test
 
 ## 0. Prerequisites
 
@@ -21,11 +22,10 @@ This project has the following dependencies :
 * maven cli installed
 * Java 11 installed
 * local kubernetes cluster running
-* default serviceAccount have access to configmaps, secrets, pods, services
 
 You will find the [instructions here](../README.md)
 
-## 1 Running the application in dev mode
+## 1 Run the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
 ```
@@ -122,11 +122,11 @@ docker push localhost:5001/guillaumebarthelemy/quarkus-k8s-gateway-service:1.0-S
 
 ### 2.2 Jvm (Non native)
 
-* Start time : 
-* Pod memory usage : 
-* Pod CPU(cores) : 
-* Image size : 
-* App build time : 
+* Start time : 3.211 seconds
+* Pod memory usage : 138Mi
+* Pod CPU(cores) : 4m
+* Image size : 535MB
+* App build time : 7.852 seconds
 
 #### 2.2.1. Build jar 
 
@@ -155,8 +155,8 @@ docker push localhost:5001/guillaumebarthelemy/quarkus-k8s-gateway-service:1.0-S
 #### 3.1. create configmap
 
 ```bash
-kubectl delete -f 1-gateway-service-configmap.yaml
-kubectl create -f 1-gateway-service-configmap.yaml
+kubectl delete -f 1-quarkus-gateway-service-configmap.yml
+kubectl create -f 1-quarkus-gateway-service-configmap.yml
 ```
 
 #### 3.2. create secret
@@ -197,8 +197,8 @@ For more informations about performances :
 
 In order to map incoming http traffic to gateway-service, run the following :
 ```bash
-kubectl delete -f 4-api-ingress.yml
-kubectl create -f 4-api-ingress.yml
+kubectl delete -f 3-api-ingress.yml
+kubectl create -f 3-api-ingress.yml
 ```
 
 Since your kind cluster has :

@@ -1,4 +1,4 @@
-package com.gbarthelemy.kubernetes.gatewayservice.resource.model;
+package com.gbarthelemy.kubernetes.gatewayservice.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
