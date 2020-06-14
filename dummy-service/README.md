@@ -10,6 +10,17 @@ This project has the following dependencies :
 * quarkus-kubernetes : create kubernetes.yml manifest when building
 * quarkus-container-image-jib : create docker image when building
 
+## 0. Prerequisites
+
+* Docker daemon
+* kind installed (Minikube could do the job also)
+* kubectl cli installed
+* maven cli installed
+* Java 11 installed
+* local kubernetes cluster running
+
+You will find the [instructions here](../README.md)
+
 ## 1 Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
@@ -41,9 +52,7 @@ Note that the native executable generated will be specific to your operating sys
 ```bash
 brew cask install graalvm/tap/graalvm-ce-java11
 brew cask install graalvm/tap/graalvm-ce-lts-java11
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.1.0/Contents/Home
 xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-*
-export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.1.0/Contents/Home/bin:"$PATH"
 ``` 
 2 On OSX : xcode dependencies 
 ```bash
@@ -59,11 +68,16 @@ sudo apt-get install build-essential libz-dev zlib1g-dev
 
 Install the native-image tool using gu install
 ```bash
-gu install native-image
+/Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.1.0/Contents/Home/bin/gu install native-image
 ```
 
 #### 2.1.1.1 Build
 
+Set JAVA_HOME : GraalVM 
+```bash
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.1.0/Contents/Home
+```
+Build Native exe
 ```bash
 mvn clean package -Pnative
 ```
@@ -72,7 +86,10 @@ mvn clean package -Pnative
 
 /!\ You will notice that in order to save time build, it is better not to have containers running while building native.  
 
-It is strongly advised to delete any running kind cluster while building (kind delete cluster --name=<cluster_name>).
+Since build requires a lot of memory, it is strongly advised to :
+* set docker daemon memory resources to 8gb
+* delete any running kind cluster while building (kind delete cluster --name=<cluster_name>).
+
 
 Build time with default properties: 02:55 min
 ```bash

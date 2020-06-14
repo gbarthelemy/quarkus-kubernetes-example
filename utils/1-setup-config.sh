@@ -1,7 +1,4 @@
 #!/bin/sh
 
-kubectl delete -f gateway-service/1-gateway-service-configmap.yaml
-kubectl create -f gateway-service/1-gateway-service-configmap.yaml
-
-kubectl delete -f gateway-service/2-gateway-service-secret.yaml
-kubectl create -f gateway-service/2-gateway-service-secret.yaml
+kubectl delete -f gateway-service/quarkus-gateway-service-configmap.yml
+kubectl create -f gateway-service/quarkus-gateway-service-configmap.yml

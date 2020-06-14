@@ -2,21 +2,23 @@
 
 This project is a tutorial about creating 2 kubernetes micro-service based on Quarkus.
 
-**Dummy Service** : Simple quarkus project with a basic root endpoint.  
-**Gateway service** : //TODO
+* **Dummy Service** : Simple quarkus project with a basic root endpoint.  
+* **Gateway service** : Simple quarkus project, including the following features : 
+  * inject spring properties from k8s configmap
+  * inject spring properties from k8s secret
+  * call dummy service from k8s client discovery 
 
 ## 1. Prerequisites
-* Docker daemon
-* kind installed (Minikube could do the job also)
+* docker daemon
+* kind installed (Minikube could do the job)
 * kubectl cli installed
 * maven cli installed
 * java 11 installed
 
 You will find the prerequisites installation [instructions here](utils/setup-tools/README.md)
 
-## 2. Setup kubernetes cluster
+## 2. Setup kind kubernetes cluster
 
-### 2.1. create kind kubernetes cluster 
 ```bash
 ./utils/0-create-kind-cluster.sh
 ```
@@ -26,12 +28,6 @@ This script does the following tasks :
 * create our local k8s cluster named spring-kube using config for handling docker registry and portMapping
 * create Contour ingress controller
 * create kind patch to forward the hostPorts to the ingress controller
-
-### 2.2. create role
-```bash
-kubectl delete -f 1-namespace-reader-role.yaml
-kubectl create -f 1-namespace-reader-role.yaml
-```
 
 ## 3. Setup Dummy service
 

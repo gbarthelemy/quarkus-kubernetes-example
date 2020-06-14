@@ -126,7 +126,7 @@ docker push localhost:5001/guillaumebarthelemy/quarkus-k8s-gateway-service:1.0-S
 * Pod memory usage : 138Mi
 * Pod CPU(cores) : 4m
 * Image size : 535MB
-* App build time : 7.852 seconds
+* App build time : ~8 seconds
 
 #### 2.2.1. Build jar 
 
@@ -155,13 +155,9 @@ docker push localhost:5001/guillaumebarthelemy/quarkus-k8s-gateway-service:1.0-S
 #### 3.1. create configmap
 
 ```bash
-kubectl delete -f 1-quarkus-gateway-service-configmap.yml
-kubectl create -f 1-quarkus-gateway-service-configmap.yml
+kubectl delete -f quarkus-gateway-service-configmap.yml
+kubectl create -f quarkus-gateway-service-configmap.yml
 ```
-
-#### 3.2. create secret
-
-TODO 
 
 ## 4. Run
 
@@ -197,8 +193,8 @@ For more informations about performances :
 
 In order to map incoming http traffic to gateway-service, run the following :
 ```bash
-kubectl delete -f 3-api-ingress.yml
-kubectl create -f 3-api-ingress.yml
+kubectl delete -f api-ingress.yml
+kubectl create -f api-ingress.yml
 ```
 
 Since your kind cluster has :
