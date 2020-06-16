@@ -107,13 +107,13 @@ You can include this part in the maven packaging step overriding properties (app
 * quarkus.container-image.build=true
 
 ```bash
-docker build -f src/main/docker/Dockerfile.native -t localhost:5001/guillaumebarthelemy/quarkus-k8s-dummy-service:1.0-SNAPSHOT .
+docker build -f src/main/docker/Dockerfile.native -t localhost:5000/quarkus/quarkus-k8s-dummy-service:1.0-SNAPSHOT .
 ```
 
 ### 2.2.3. Push to the kind repository
 
 ```bash
-docker push localhost:5001/guillaumebarthelemy/quarkus-k8s-dummy-service:1.0-SNAPSHOT
+docker push localhost:5000/quarkus/quarkus-k8s-dummy-service:1.0-SNAPSHOT
 ```
 
 ### 2.2 Jvm (Non native)
@@ -137,13 +137,13 @@ You can include this part in the maven packaging step overriding properties (app
 * quarkus.container-image.build=true
 
 ```bash
-docker build -f src/main/docker/Dockerfile.jvm -t localhost:5001/guillaumebarthelemy/quarkus-k8s-dummy-service:1.0-SNAPSHOT .
+docker build -f src/main/docker/Dockerfile.jvm -t localhost:5000/quarkus/quarkus-k8s-dummy-service:1.0-SNAPSHOT .
 ```
 
 ### 2.2.3. Push the image to the kind repository
 
 ```bash
-docker push localhost:5001/guillaumebarthelemy/quarkus-k8s-dummy-service:1.0-SNAPSHOT
+docker push localhost:5000/quarkus/quarkus-k8s-dummy-service:1.0-SNAPSHOT
 ```
 
 ## 3. Run

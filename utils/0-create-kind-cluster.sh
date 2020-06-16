@@ -34,7 +34,7 @@ set -o errexit
 # desired cluster name; default is "kind"
 KIND_CLUSTER_NAME='quarkus-kube'
 kind_version=$(kind version)
-reg_port='5001'
+reg_port='5000'
 reg_name='quarkus-kube-registry'
 reg_network='kind'
 reg_ip_selector='{{.NetworkSettings.Networks.kind.IPAddress}}'
@@ -66,7 +66,6 @@ if [ "${running}" != 'true' ]; then
   fi
 
   docker run \
-    -e "REGISTRY_HTTP_ADDR=0.0.0.0:${reg_port}" \
     -d --restart=always -p "${reg_port}:${reg_port}" --name "${reg_name}" --net "${reg_network}" \
     registry:2
 fi
@@ -82,7 +81,7 @@ echo "Registry IP: ${reg_ip}"
 cat <<EOF | kind create cluster --name "${KIND_CLUSTER_NAME}" --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
-containerdConfigPatches: 
+containerdConfigPatches:
 - |-
   [plugins."io.containerd.grpc.v1.cri".registry.mirrors."localhost:${reg_port}"]
     endpoint = ["http://${reg_ip}:${reg_port}"]
