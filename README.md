@@ -1,4 +1,4 @@
-# Spring cloud kubernetes example
+# Quarkus kubernetes example
 
 This project is a tutorial about creating 2 kubernetes micro-service based on Quarkus.
 
