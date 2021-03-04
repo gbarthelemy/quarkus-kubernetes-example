@@ -32,17 +32,17 @@ mvn clean quarkus:dev
 
 ### 2.1. Native
 
-* Start time : 0.017s
-* Pod memory usage : 4Mi
+* Start time : 0.021s
+* Pod memory usage : 5Mi
 * Pod CPU(cores) : 1m
-* Image size : 164MB
+* Image size : 167MB
 * App build time : 1 to 3 minutes
 
 cf https://quarkus.io/guides/building-native-image
 
-#### 2.1.1. [Option 1] Build native exe for your OS
+#### 2.1.1.(A) [Option 1] Build native exe for your OS
 
-Build time : 01:38 min
+Build time : 01:56 min
 
 Note that the native executable generated will be specific to your operating system. To create an executable that will run in a container, use the following [Option 2].
 
@@ -68,21 +68,25 @@ sudo apt-get install build-essential libz-dev zlib1g-dev
 
 Install the native-image tool using gu install
 ```bash
-/Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.1.0/Contents/Home/bin/gu install native-image
+/Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0/Contents/Home/bin/gu install native-image
+```
+OR
+```bash
+gu install native-image
 ```
 
 #### 2.1.1.1 Build
 
 Set JAVA_HOME : GraalVM 
 ```bash
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.1.0/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0.2/Contents/Home
 ```
 Build Native exe
 ```bash
 mvn clean package -Pnative
 ```
 
-#### 2.1.1. [Option 2] Build native exe from docker container
+#### 2.1.1.(B) [Option 2] Build native exe from docker container
 
 /!\ You will notice that in order to save time build, it is better not to have containers running while building native.  
 
@@ -91,14 +95,9 @@ Since build requires a lot of memory, it is strongly advised to :
 * delete any running kind cluster while building (kind delete cluster --name=<cluster_name>).
 
 
-Build time with default properties: 02:55 min
+Build time with default Ubi Quarkus builder image (21.0.0-java11) : 01:59 min
 ```bash
 mvn clean package -Pnative -Dquarkus.native.container-build=true
-```
-
-Build time with image 20.1.0-java11 : 02:31 min
-```bash
-mvn clean package -Pnative -Dquarkus.native.container-build=true -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-native-image:20.1.0-java11
 ```
 
 #### 2.1.2. Build docker native image from exe
@@ -118,15 +117,15 @@ docker push localhost:5000/quarkus/quarkus-k8s-dummy-service:1.0-SNAPSHOT
 
 ### 2.2 Jvm (Non native)
 
-* Start time : 1.629s
-* Pod memory usage : 64Mi
-* Pod CPU(cores) : 4m
-* Image size : 510MB
-* App build time : ~5 seconds
+* Start time : 0.829s
+* Pod memory usage : 66Mi
+* Pod CPU(cores) : 2m
+* Image size : 380MB
+* App build time : ~7 seconds
 
 #### 2.2.1. Build jar 
 
-Build time : 5.287 s
+Build time : 6.982 s
 ```
 mvn clean package
 ```

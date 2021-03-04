@@ -1,12 +1,12 @@
 #!/bin/sh
 
 # Dummy service (JVM jar)
-cd dummy-service
+cd dummy-service || exit
 mvn clean package -Dquarkus.container-image.build=true
 cd ..
 
 # Gateway service (JVM jar)
-cd gateway-service
+cd gateway-service || exit
 mvn clean package -Dquarkus.container-image.build=true
 cd ..
 

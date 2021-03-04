@@ -36,17 +36,17 @@ mvn clean quarkus:dev
 
 ### 2.1. Native
 
-* Start time : 0.124s
-* Pod memory usage : 8Mi
+* Start time : 0.115s
+* Pod memory usage : 9Mi
 * Pod CPU(cores) : 1m
-* Image size : 274MB
-* App build time : 6 to 8 minutes
+* Image size : 196MB
+* App build time : 3 to 8 minutes
 
 cf https://quarkus.io/guides/building-native-image
 
-#### 2.1.1. [Option 1] Build native exe for your OS
+#### 2.1.1.(A) [Option 1] Build native exe for your OS
 
-Build time : 06:45 min
+Build time : 03:33 min
 
 Note that the native executable generated will be specific to your operating system. To create an executable that will run in a container, use the following [Option 2].
 
@@ -72,21 +72,25 @@ sudo apt-get install build-essential libz-dev zlib1g-dev
 
 Install the native-image tool using gu install
 ```bash
-/Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.1.0/Contents/Home/bin/gu install native-image
+/Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0/Contents/Home/bin/gu install native-image
+```
+OR
+```bash
+gu install native-image
 ```
 
 #### 2.1.1.1 Build
 
 Set JAVA_HOME : GraalVM 
 ```bash
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.1.0/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0.2/Contents/Home
 ```
 Build Native exe
 ```bash
 mvn clean package -Pnative
 ```
 
-#### 2.1.1. [Option 2] Build native exe from docker container
+#### 2.1.1.(B) [Option 2] Build native exe from docker container
 
 /!\ You will notice that in order to save time build, it is better not to have containers running while building native.  
 
@@ -95,14 +99,9 @@ Since build requires a lot of memory, it is strongly advised to :
 * delete any running kind cluster while building (kind delete cluster --name=<cluster_name>).
 
 
-Build time with default Ubi Quarkus builder image (19.3.1-java11) : 07:50 min
+Build time with default Ubi Quarkus builder image (21.0.0-java11) : 04:40 min
 ```bash
 mvn clean package -Pnative -Dquarkus.native.container-build=true
-```
-
-Build time with Ubi Quarkus image 20.1.0-java11 : 06:10 min
-```bash
-mvn clean package -Pnative -Dquarkus.native.container-build=true -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-native-image:20.1.0-java11
 ```
 
 #### 2.1.2. Build docker native image from exe
@@ -122,11 +121,11 @@ docker push localhost:5000/quarkus/quarkus-k8s-gateway-service:1.0-SNAPSHOT
 
 ### 2.2 Jvm (Non native)
 
-* Start time : 3.211 seconds
-* Pod memory usage : 138Mi
-* Pod CPU(cores) : 4m
-* Image size : 535MB
-* App build time : ~8 seconds
+* Start time : 2.079 seconds
+* Pod memory usage : 115Mi
+* Pod CPU(cores) : 2m
+* Image size : 400MB
+* App build time : ~10 seconds
 
 #### 2.2.1. Build jar 
 
@@ -205,4 +204,22 @@ Since your kind cluster has :
 You don't need anymore port-forward to call your gateway app. 
 ```bash
 curl localhost
+```
+
+## 7. Test API
+
+Test Gateway API using /dummy endpoint (which internally call dummy service)
+```bash
+curl localhost:80/dummy
+```
+
+Test Gateway API /configmap endpoint (which internally call dummy service)
+```bash
+curl localhost:80/configmap
+```
+
+//TODO
+Test Gateway API /secret endpoint (which internally get message from configmap)
+```bash
+curl localhost:80/secret
 ```
