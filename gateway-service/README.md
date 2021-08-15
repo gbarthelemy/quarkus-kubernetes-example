@@ -204,38 +204,24 @@ For more informations about performances :
 * https://quarkus.io/blog/runtime-performance/
 
 
-## 6 Create Ingress controller
+## 7 Test API
 
-In order to map incoming http traffic to gateway-service, run the following :
-```bash
-kubectl delete -f api-ingress.yml
-kubectl create -f api-ingress.yml
-```
-
-Since your kind cluster has :
- * extra config for portMapping
- * a Contour ingress controller deployed
- * a kind patch to forward the hostPorts to the ingress controller
-
-You don't need anymore port-forward to call your gateway app. 
 ```bash
 curl localhost
 ```
 
-## 7 Test API
-
 Test Gateway API using /dummy endpoint (which internally call dummy service)
 ```bash
-curl localhost:80/dummy
+curl localhost/dummy
 ```
 
 Test Gateway API /configmap endpoint (which internally call dummy service)
 ```bash
-curl localhost:80/configmap
+curl localhost/configmap
 ```
 
 //TODO
 Test Gateway API /secret endpoint (which internally get message from configmap)
 ```bash
-curl localhost:80/secret
+curl localhost/secret
 ```
