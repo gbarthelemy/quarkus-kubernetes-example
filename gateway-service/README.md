@@ -164,6 +164,14 @@ kubectl delete -f quarkus-gateway-service-configmap.yml
 kubectl create -f quarkus-gateway-service-configmap.yml
 ```
 
+#### 3.2 create secret
+
+```bash
+kubectl create secret generic the-secrets \
+        --from-literal=username=admin \
+        --from-literal=password=secret
+```
+
 ## 4 Run
 
 ### 4.0 Prerequisites
@@ -215,13 +223,12 @@ Test Gateway API using /dummy endpoint (which internally call dummy service)
 curl localhost/dummy
 ```
 
-Test Gateway API /configmap endpoint (which internally call dummy service)
+Test Gateway API /configmap endpoint (which internally get properties from configmap)
 ```bash
 curl localhost/configmap
 ```
 
-//TODO
-Test Gateway API /secret endpoint (which internally get message from configmap)
+Test Gateway API /secret endpoint (which internally get secret from configmap)
 ```bash
 curl localhost/secret
 ```
