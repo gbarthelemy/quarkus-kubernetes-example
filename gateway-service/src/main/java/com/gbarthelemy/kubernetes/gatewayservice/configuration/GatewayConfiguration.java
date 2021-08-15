@@ -1,11 +1,11 @@
 package com.gbarthelemy.kubernetes.gatewayservice.configuration;
 
-import io.quarkus.arc.config.ConfigProperties;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithName;
 
-@ConfigProperties(prefix = "gateway")
+@ConfigMapping(prefix = "gateway")
 public interface GatewayConfiguration {
 
-    @ConfigProperty(name = "message")
+    @WithName("message")
     String getMessage();
 }

@@ -26,8 +26,8 @@ You will find the prerequisites installation [instructions here](utils/setup-too
 This script does the following tasks :
 * run registry:2 container (local image repository used by our local k8s cluster)
 * create our local k8s cluster named quarkus-kube using config for handling docker registry and portMapping
-* create Contour ingress controller
-* create kind patch to forward the hostPorts to the ingress controller
+* create NGINX ingress controller
+* create kubernetes Ingress component to redirect incoming traffic to our gateway service on port 8080
 
 ## 3. Setup Dummy service
 
