@@ -111,7 +111,7 @@ Since build requires a lot of memory, it is strongly advised to :
 * delete any running kind cluster while building (kind delete cluster --name=<cluster_name>).
 
 
-Build time with default Ubi Quarkus builder image (21.1-java11) : 02:32 min
+Build time with default Ubi Quarkus builder image (22.0-java17) : 02:32 min
 ```bash
 # Be sure docker is running 
 mvn clean package -Pnative -Dquarkus.native.container-build=true
