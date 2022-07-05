@@ -38,10 +38,10 @@ You can now choose to build OS specific image (as a Native binary) at [section 2
 
 ### 2.1 Native 
 
-* Start time : 0.044s
-* Pod memory usage : 8Mi
-* Pod CPU(cores) : 1m
-* Image size : 176MB
+* Start time : 0.044s (0.111s for micro)
+* Pod memory usage : 8Mi (2Mi for micro)
+* Pod CPU(cores) : 1m (0m for micro)
+* Image size : 176MB (107MB for micro)
 * App build time : 3 to 5 minutes
 
 All operations are done on a 2,2 ghz intel core i7 quad-core.
@@ -93,7 +93,7 @@ gu install native-image
 
 Set JAVA_HOME : GraalVM 
 ```bash
-export JAVA_HOME=/Users/guillaumebarthelemy/.sdkman/candidates/java/21.2.0.r11-grl/bin/java
+export JAVA_HOME=/Users/guillaumebarthelemy/.sdkman/candidates/java/22.1.0.r17-grl/bin/java
 ```
 Build Native exe
 ```bash
@@ -111,7 +111,7 @@ Since build requires a lot of memory, it is strongly advised to :
 * delete any running kind cluster while building (kind delete cluster --name=<cluster_name>).
 
 
-Build time with default Ubi Quarkus builder image (22.0-java17) : 03:50 min
+Build time with default Ubi Quarkus builder image (22.0-java17) ~4min
 ```bash
 # Be sure docker is running 
 mvn clean package -Pnative -Dquarkus.native.container-build=true
@@ -131,17 +131,16 @@ Since you chose to build Native binary image you can now skip 2.2 JVM (Non Nativ
 
 ### 2.2 Jvm (Non native)
 
-* Start time : 2.214 seconds
-* Pod memory usage : 110Mi
+* Start time : 2.408 seconds
+* Pod memory usage : 130Mi
 * Pod CPU(cores) : 2m
-* Image size : 401MB
-* App build time : ~10 seconds
+* Image size : 438MB
+* App build time : ~12 seconds
 
 All operations are done on a 2,2 ghz intel core i7 quad-core.
 
 #### 2.2.1 Build jar 
 
-Build time : 10.555 s
 ```
 mvn clean package
 ```
@@ -189,7 +188,7 @@ docker push localhost:5000/quarkus/quarkus-k8s-gateway-service:1.0-SNAPSHOT
 
 Using the generated
 ```bash
-kubectl delete -f target/kubernetes/kubernetes.yml
+kubectl delete -f target/kubernetes/kubernetes.yml;
 kubectl create -f target/kubernetes/kubernetes.yml
 ```
 

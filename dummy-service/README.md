@@ -90,7 +90,7 @@ gu install native-image
 
 Set JAVA_HOME : GraalVM 
 ```bash
-export JAVA_HOME=/Users/guillaumebarthelemy/.sdkman/candidates/java/21.2.0.r11-grl/bin/java
+export JAVA_HOME=/Users/guillaumebarthelemy/.sdkman/candidates/java/22.1.0.r17-grl/bin/java
 ```
 Build Native exe
 ```bash
@@ -130,17 +130,16 @@ Since you chose to build Native binary image you can now skip 2.2 JVM (Non Nativ
 
 ### 2.2 Jvm (Non native)
 
-* Start time : 1.265s
-* Pod memory usage : 80Mi
+* Start time : 1.862s
+* Pod memory usage : 83Mi
 * Pod CPU(cores) : 2m
-* Image size : 382MB
-* App build time : ~8 seconds
+* Image size : 417MB
+* App build time : ~9 seconds
 
 All operations are done on a 2,2 ghz intel core i7 quad-core.
 
 #### 2.2.1. Build jar 
 
-Build time : 8.909 s
 ```
 mvn clean package
 ```
@@ -171,7 +170,7 @@ docker push localhost:5000/quarkus/quarkus-k8s-dummy-service:1.0-SNAPSHOT
 
 Using the generated
 ```bash
-kubectl delete -f target/kubernetes/kubernetes.yml
+kubectl delete -f target/kubernetes/kubernetes.yml;
 kubectl create -f target/kubernetes/kubernetes.yml
 ```
 
@@ -179,9 +178,9 @@ kubectl create -f target/kubernetes/kubernetes.yml
 
 Check boostrap time
 ```bash
-# Get pods name
+# Get <pod_name>
 kubectl get pods
-# Get pod bootstrap time
+# Get pod bootstrap time replacing <pod_name>
 kubectl logs <pod_name> | grep started
 ```
 
