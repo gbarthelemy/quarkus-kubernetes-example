@@ -9,14 +9,14 @@ Once it is installed, you can list java version from terminal (cygwin, git bash 
 sdk list java
 ```
 
-Install java 11 version using identifier
+Install java 17 version using identifier
 ```bash
-sdk install java 11.0.7.hs-adpt
+sdk install java <version_17_identifier>
 ```
 
-You can switch java versions
+Then switch java home
 ```bash
-sdk use java 11.0.7.hs-adpt
+sdk use java <version_17_identifier>
 ```
 ### OSX & Linux
 
@@ -33,14 +33,14 @@ List java version
 sdk list java
 ```
 
-Install java 11 version using identifier
+Install java 17 version using identifier
 ```bash
-sdk install java 11.0.7.hs-adpt
+sdk install java <version_17_identifier>
 ```
 
 You can switch java versions
 ```bash
-sdk use java 11.0.7.hs-adpt
+sdk use java <version_17_identifier>
 ```
 
 # 2. Install Docker

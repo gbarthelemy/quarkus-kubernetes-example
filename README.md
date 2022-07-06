@@ -15,7 +15,7 @@ This project is a tutorial about creating 2 kubernetes micro-service based on Qu
 * maven cli installed
 * java 11 installed
 
-You will find the prerequisites installation [instructions here](utils/setup-tools/README.md)
+You will find the prerequisites installation [instructions here](utils/markdown/SETUP_TOOLS.md)
 
 ## 2. Setup kind kubernetes cluster
 

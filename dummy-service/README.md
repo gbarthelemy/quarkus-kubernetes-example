@@ -10,14 +10,12 @@ This project has the following dependencies :
 * quarkus-kubernetes : create kubernetes.yml manifest when building
 * quarkus-container-image-jib : create docker image when building
 
-## 0. Prerequisites
+## 🧭 Prerequisites
 
 * Docker daemon
-* kind installed (Minikube could do the job also)
-* kubectl cli installed
 * maven cli installed
-* Java 11 installed
-* local kubernetes cluster running
+* kubectl cli installed
+* kind installed (or Minikube) and local kubernetes cluster running
 
 You will find the [instructions here](../README.md)
 
@@ -28,11 +26,11 @@ You can run your application in dev mode that enables live coding using:
 mvn clean quarkus:dev
 ```
 
-## 2 Build the app docker image
+## 🔧 Build
 
 You can now choose to build OS specific image (as a Native binary) at [section 2.1](#2.1.-Native) or JVM-based image (as a java bytecode) at [section 2.2](#2.2-Jvm-(Non-native))
 
-### 2.1. Native
+### 1. Native image
 
 * Start time : 0.023s
 * Pod memory usage : 5Mi
@@ -44,49 +42,17 @@ All operations are done on a 2,2 ghz intel core i7 quad-core.
 
 cf https://quarkus.io/guides/building-native-image
 
-#### 2.1.1.(A) [Option 1] Build native exe for your OS
+#### 1.1.(A) [Option 1] Build native exe for your OS
 
 Build time : 01:41 min
 
 Note that the native executable generated will be specific to your operating system. To create an executable that will run in a container, use the following [Option 2].
 
-#### 2.1.1.0 Prerequisites
+#### 1.1.0 Prerequisites
 
-##### OSX
-1 Install graalvm using [homebrew](https://github.com/graalvm/homebrew-tap)
-```bash
-brew cask install graalvm/tap/graalvm-ce-java11
-brew cask install graalvm/tap/graalvm-ce-lts-java11
-xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-*
-```
-You can also use sdkman...
+Have graalvm and native-image installed. You will find the prerequisites installation [instructions here](../utils/markdown/PREREQUISITES.md)
 
-2 xcode dependencies 
-```bash
-xcode-select --install
-```
-
-##### Linux
-1 On Linux : GCC glibc and zlib 
-```bash
-# dnf (rpm-based)
-sudo dnf install gcc glibc-devel zlib-devel
-# Debian-based distributions:
-sudo apt-get install build-essential libz-dev zlib1g-dev
-```
-You can also use sdkman...
-
-##### Install native-image tool
-Install the native-image tool using `gu install cmd`
-```bash
-/Users/guillaumebarthelemy/.sdkman/candidates/java/current/bin/gu install native-image
-```
-OR
-```bash
-gu install native-image
-```
-
-#### 2.1.1.1 Build
+#### 1.1.1 Build
 
 Set JAVA_HOME : GraalVM 
 ```bash
@@ -102,7 +68,7 @@ Executable file `target/quarkus-k8s-dummy-service-1.0-SNAPSHOT-runner` is genera
 ./target/quarkus-k8s-dummy-service-1.0-SNAPSHOT-runner
 ````
 
-#### 2.1.1.(B) [Option 2] Build native exe from docker container
+#### 1.1.(B) [Option 2] Build native exe from docker container
 
 /!\ In order to save time build, it is better not having containers running while building native.  
 
@@ -117,7 +83,7 @@ Build time with default Ubi Quarkus builder image (22.0-java17) : 02:32 min
 mvn clean package -Pnative -Dquarkus.native.container-build=true
 ```
 
-#### 2.1.2. Build docker native image from exe
+#### 1.2. Build native image from exe
 
 You can include this part in the maven packaging step overriding properties (application.properties) :
 * quarkus.container-image.build=true
@@ -154,19 +120,19 @@ docker build -f src/main/docker/Dockerfile.jvm -t localhost:5000/quarkus/quarkus
 ```
 
 
-## 3. Run
+## 🚀Run
 
-### 3.0. Prerequisites
+### 0. Prerequisites
 
 * kind cluster running (you will find [instructions here](../README.md#2.1.-create-kind-kubernetes-cluster))
 
-### 3.1. Push images to the Kind repository
+### 1. Push images to the Kind repository
 
 ```bash
 docker push localhost:5000/quarkus/quarkus-k8s-dummy-service:1.0-SNAPSHOT
 ```
 
-### 3.2. Run the app
+### 2. Run the app
 
 Using the generated
 ```bash
@@ -174,7 +140,7 @@ kubectl delete -f target/kubernetes/kubernetes.yml;
 kubectl create -f target/kubernetes/kubernetes.yml
 ```
 
-## 4. Check performance
+## 🔎 Check performance
 
 Check boostrap time
 ```bash
